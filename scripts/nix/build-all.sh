@@ -208,4 +208,10 @@ if run_step "7"; then
   ./build.sh
 fi
 
+if run_step "8"; then
+  begin_step "8" "gem5 build"
+  cd ${BBDIR}/gem5
+  ./demo_build.sh
+fi
+
 begin_step "END" "Setup completed successfully!"
