@@ -1,23 +1,10 @@
-<p align="center">
-    <img src="https://raw.githubusercontent.com/DangoSys/documents/refs/heads/main/content/zh/images/logo.png" width = "100%" height = "70%">
-</p>
+# PolyChip
 
-<div align="center" style="margin-top: -10pt;">
-
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/DangoSys/buckyball)
-[![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00IDEyTDEyIDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/DangoSys/buckyball)
-[![Document](https://img.shields.io/badge/documents-online-30c452?style=plastic&logo=gitbook)](http://www.buckyball.tech/docs/en/Overview/Overview.md)
-[![buckyball CI](https://github.com/DangoSys/buckyball/actions/workflows/test.yml/badge.svg)](https://github.com/DangoSys/buckyball/actions/workflows/test.yml)
-
-</div>
-
-# Buckyball
-
-Buckyball is a scalable framework for Domain Specific Architecture, built on RISC-V architecture and optimized for high-performance computing and machine learning accelerator design.
+PolyChip is a chiplet-oriented framework for Domain Specific Architecture, built on RISC-V and designed for scalable multi-die integration in high-performance computing and machine learning accelerators.
 
 ## Project Overview
 
-The buckyball framework provides a complete hardware design, simulation verification, and software development toolchain, supporting the full development process from RTL design to system-level verification. The framework adopts a modular design that supports flexible configuration and extension, suitable for various specialized computing scenarios.
+PolyChip provides an end-to-end toolchain for chiplet RTL design, die-to-die interconnect modeling, simulation, and software development—from individual tile implementation to multi-die system-level verification. The framework uses a modular chiplet architecture with flexible composition and extension, supporting diverse 2.5D/3D packaging and specialized compute integration scenarios.
 
 ## Quick Start
 
@@ -28,7 +15,7 @@ We use Nix Flake as our main build system. If you have not installed nix, instal
 **1. Clone Repository**
 
 ```bash
-git clone https://github.com/DangoSys/buckyball.git
+git clone https://github.com/DangoSys/ploychip.git
 ```
 
 **2. Initialize Environment**
@@ -51,23 +38,3 @@ Run Verilator simulation test to verify installation:
 bbdev verilator --run '--jobs 16 --binary ctest_vecunit_matmul_ones_singlecore-baremetal --config sims.verilator.BuckyballToyVerilatorConfig --batch'
 ```
 
-**4. Try faster simulation using bebop**
-
-```bash
-bbdev bebop-verilator --run '--binary ctest_vecunit_matmul_ones_singlecore-baremetal --batch --config sims.verilator.BuckyballToyVerilatorConfig --itrace --mtrace --pmctrace --ctrace --banktrace'
-```
-
-## Tutorial
-You can start to learn ball and blink from [here](https://github.com/DangoSys/documents/blob/main/content/en/Tutorial/Building%20Your%20Own%20Hardware%20Designs.md)
-
-## Additional Resources
-
-You can learn more from [DeepWiki](https://deepwiki.com/DangoSys/buckyball) and [Zread](https://zread.ai/DangoSys/buckyball)
-
-
-## Contributors
-Thank you for considering contributing to buckyball!
-
-<a href="https://github.com/DangoSys/buckyball/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=DangoSys/buckyball" />
-</a>
