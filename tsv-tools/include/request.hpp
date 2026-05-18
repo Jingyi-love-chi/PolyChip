@@ -1,6 +1,7 @@
 #ifndef TSVRA_REQUEST_HPP
 #define TSVRA_REQUEST_HPP
 
+#include <cstddef>
 #include <cstdint>
 #include <vector>
 

@@ -202,4 +202,10 @@ if run_step "7"; then
   cp "${BBDIR}/scripts/pre-commit-hook.sh" "${BBDIR}/.git/hooks/pre-commit"
 fi
 
+if run_step "7"; then
+  begin_step "7" "tsv-tools build"
+  cd ${BBDIR}/tsv-tools
+  ./build.sh
+fi
+
 begin_step "END" "Setup completed successfully!"
