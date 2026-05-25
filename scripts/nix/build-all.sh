@@ -210,6 +210,8 @@ fi
 
 if run_step "8"; then
   begin_step "8" "gem5 build"
+  cd ${BBDIR}
+  git submodule update --init --progress gem5
   cd ${BBDIR}/gem5
   ./demo_build.sh
 fi
