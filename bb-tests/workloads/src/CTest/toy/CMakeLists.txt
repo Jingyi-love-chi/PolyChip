@@ -95,6 +95,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LINK_FLAGS}")
 #-------------------------------------------------------------------------------
 add_cross_platform_test_target(ctest_mvin_mvout_acc_test mvin_mvout_acc_test.c)
 add_cross_platform_test_target(ctest_mvin_mvout_test mvin_mvout_test.c)
+add_cross_platform_test_target(ctest_mvin_mvout_stride_test mvin_mvout_stride_test.c)
 add_cross_platform_test_target(ctest_vecunit_matmul_ones vecunit_matmul_ones.c)
 add_cross_platform_test_target(ctest_vecunit_matmul_identity_random vecunit_matmul_identity_random.c)
 add_cross_platform_test_target(ctest_vecunit_matmul_row_col_vector vecunit_matmul_row_col_vector.c)
@@ -112,11 +113,17 @@ add_cross_platform_test_target(ctest_im2col_test im2col_test.c)
 add_cross_platform_test_target(ctest_transpose_test transpose_test.c)
 add_cross_platform_test_target(ctest_transpose_16xn_test transpose_16xn_test.c)
 add_cross_platform_test_target(ctest_transpose_matmul transpose_matmul.c)
+add_cross_platform_test_target(ctest_systolic_matmul_4x4_ones systolic_matmul_4x4_ones.c)
+add_cross_platform_test_target(ctest_systolic_matmul_8x8_ones systolic_matmul_8x8_ones.c)
+add_cross_platform_test_target(ctest_systolic_matmul_16x16_ones systolic_matmul_16x16_ones.c)
+add_cross_platform_test_target(ctest_systolic_matmul_32x32_ones systolic_matmul_32x32_ones.c)
 add_cross_platform_test_target(ctest_relu_test relu_test.c)
+add_cross_platform_test_target(ctest_mmio_minimal_test mmio_minimal_test.c)
+add_cross_platform_test_target(ctest_mxfp2int_test mxfp2int_test.c)
 add_cross_platform_test_target(ctest_vsetvli test_vsetvli.c)
 add_cross_platform_test_target(ctest_bfp_test bfp_test.c)
-add_cross_platform_test_target(ctest_quant_test quant_test.c)
-add_cross_platform_test_target(ctest_dequant_test dequant_test.c)
+add_cross_platform_test_target(ctest_fp2int_test fp2int_test.c)
+add_cross_platform_test_target(ctest_int2fp_test int2fp_test.c)
 add_cross_platform_test_target(ctest_tlb_test tlb_test.c)
 add_cross_platform_test_target(ctest_bdb_counter_test bdb_counter_test.c)
 add_cross_platform_test_target(ctest_gemmini_os_risc_basic_test gemmini_os_risc_basic_test.c)
@@ -137,6 +144,7 @@ add_cross_platform_test_target(ctest_gemmini_ws_cisc_conv_test gemmini_ws_cisc_c
 add_custom_target(buckyball-CTest-build ALL DEPENDS
   ctest_mvin_mvout_acc_test
   ctest_mvin_mvout_test
+  ctest_mvin_mvout_stride_test
   ctest_vecunit_matmul_ones
   ctest_vecunit_matmul_identity_random
   ctest_vecunit_matmul_row_col_vector
@@ -154,13 +162,19 @@ add_custom_target(buckyball-CTest-build ALL DEPENDS
   ctest_transpose_test
   ctest_transpose_16xn_test
   ctest_transpose_matmul
+  ctest_systolic_matmul_4x4_ones
+  ctest_systolic_matmul_8x8_ones
+  ctest_systolic_matmul_16x16_ones
+  ctest_systolic_matmul_32x32_ones
   ctest_relu_test
+  ctest_mxfp2int_test
   ctest_vsetvli
   ctest_bfp_test
-  ctest_quant_test
-  ctest_dequant_test
+  ctest_fp2int_test
+  ctest_int2fp_test
   ctest_tlb_test
   ctest_bdb_counter_test
+  ctest_mmio_minimal_test
   ctest_gemmini_os_risc_basic_test
   ctest_gemmini_os_risc_shift_test
   ctest_gemmini_os_risc_atranspose_test

@@ -9,7 +9,7 @@ import framework.top.GlobalConfig
 import freechips.rocketchip.tile._
 
 import framework.frontend.decoder.GISA._
-import framework.memdomain.frontend.cmd_channel.decoder.DISA._
+import framework.memdomain.frontend.cmd.decoder.DISA._
 import framework.gpdomain.sequencer.decoder.DISA._
 import framework.frontend.scoreboard.BankAccessInfo
 
@@ -23,6 +23,9 @@ class PostGDCmd(val b: GlobalConfig) extends Bundle {
   val domain_id  = UInt(4.W)
   val cmd        = new RoCCCommandBB(b.core.xLen)
   val bankAccess = new BankAccessInfo(log2Up(b.memDomain.bankNum))
+  val op1_col    = UInt(5.W)
+  val op2_col    = UInt(5.W)
+  val wr_col     = UInt(5.W)
   val isFence    = Bool()
   val isBarrier  = Bool()
 }
@@ -53,7 +56,9 @@ class GlobalDecoder(val b: GlobalConfig) extends Module {
   // Instruction type determination: distinguish Ball, Mem, Fence, GP (RVV) instructions
   val is_mem_inst = (func7 === MVIN_BITPAT) ||
     (func7 === MVOUT_BITPAT) ||
-    (func7 === MSET_BITPAT)
+    (func7 === MSET_BITPAT) ||
+    (func7 === MMIO_SET_BITPAT) ||
+    (func7 === MVIN_MMIO_BITPAT)
 
   val is_frontend_inst = func7 === FENCE_BITPAT
   val is_barrier_inst  = func7 === BARRIER_BITPAT
@@ -115,6 +120,9 @@ class GlobalDecoder(val b: GlobalConfig) extends Module {
   io.id_o.bits.domain_id  := domain_id
   io.id_o.bits.cmd        := io.id_i.bits.cmd
   io.id_o.bits.bankAccess := bankAccess
+  io.id_o.bits.op1_col    := 0.U
+  io.id_o.bits.op2_col    := 0.U
+  io.id_o.bits.wr_col     := 0.U
   io.id_o.bits.isFence    := is_frontend_inst
   io.id_o.bits.isBarrier  := is_barrier_inst
 }

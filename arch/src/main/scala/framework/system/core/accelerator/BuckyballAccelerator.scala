@@ -11,8 +11,8 @@ import framework.system.core.rocket.{RoCCCommandBB, RoCCResponseBB}
 import framework.gpdomain.GpDomain
 import framework.memdomain.MemDomain
 import framework.memdomain.backend.MemRequestIO
-import framework.memdomain.frontend.outside_channel.{MemConfigerIO}
-import framework.memdomain.frontend.outside_channel.tlb.{BBTLBExceptionIO, BBTLBPTWIO}
+import framework.memdomain.frontend.mem.{MemConfigerIO}
+import framework.memdomain.frontend.mem.tlb.{BBTLBExceptionIO, BBTLBPTWIO}
 import framework.balldomain.BallDomain
 
 /**
@@ -122,6 +122,9 @@ class BuckyballAccelerator(val b: GlobalConfig)(edge: TLEdgeOut) extends Module 
   }
 
   ballDomain.bankWrite <> memDomain.io.ballDomain.bankWrite
+
+  // --- BallDomain <-> MemDomain (MMIO read path) ---
+  ballDomain.mmioRead <> memDomain.io.ballDomain.mmioRead
 
   // --- PTW ---
   io.ptw(0).req <> memDomain.io.ptw(0).req
